@@ -1,5 +1,5 @@
 # risk
-risk simulation
+risk simulation methods
 
 -----------------------------------------------------------------------------
 Overview:

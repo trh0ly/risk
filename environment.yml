@@ -1,0 +1,10 @@
+name: risk1
+dependencies:
+  - numpy
+  - pandas
+  - matplotlib
+  - operator
+  - datetime
+  - sys
+  - scipy
+  

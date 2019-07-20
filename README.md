@@ -12,6 +12,8 @@ Status:
 
 This project is in the development phase. 
 
+You can run the project here: https://gke.mybinder.org/v2/gh/trh0ly/risk/master 
+
 -----------------------------------------------------------------------------
 Copyright:
 

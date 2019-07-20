@@ -1,19 +1,19 @@
 # risk
 risk simulation
 
-#-----------------------------------------------------------------------------
-#Overview:
+-----------------------------------------------------------------------------
+Overview:
 
 In this project different risk simulation methods like the historical simulation and the variance-covariance method are implemented with the programming language Python.
 The aim is to introduce students to the use of programming languages such as Python step by step and on the basis of real capital market data, and to understand the theoretical concepts from teaching on the basis of a practical example.
 
-#-----------------------------------------------------------------------------
-#Status:
+-----------------------------------------------------------------------------
+Status:
 
 This project is in the development phase. 
 
-#-----------------------------------------------------------------------------
-#Copyright:
+-----------------------------------------------------------------------------
+Copyright:
 
 The distribution of the source code is prohibited at this time.
 

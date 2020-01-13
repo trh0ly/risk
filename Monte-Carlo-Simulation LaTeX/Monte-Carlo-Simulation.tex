@@ -1,0 +1,943 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+%\documentclass[11pt]{article}
+\documentclass[paper=landscape]{scrartcl}
+	\usepackage[paperwidth=40cm,paperheight=235cm,margin=1in]{geometry}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Monte-Carlo-Simulation}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{monte-carlo-simulation}{%
+\section{Monte-Carlo-Simulation}\label{monte-carlo-simulation}}
+
+© Thomas Robert Holy 2019 Version 1.1.1 Visit me on GitHub:
+https://github.com/trh0ly \#\# Grundlegende Einstellungen: Zunächst
+müssen die notwendigen Pakete (auch Module) importiert werden, damit auf
+diese zugegriffen werden kann.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} \PY{c+c1}{\PYZsh{} Programmbibliothek die Hilfsmittel für die Verwaltung von Daten und deren Analyse anbietet}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{st} \PY{c+c1}{\PYZsh{} SciPy ist ein Python\PYZhy{}basiertes Ökosystem für Open\PYZhy{}Source\PYZhy{}Software für Mathematik, Naturwissenschaften und Ingenieurwissenschaften}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{rankdata}\PY{p}{,} \PY{n}{norm}  
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{array}\PY{p}{,} \PY{n}{linalg}\PY{p}{,} \PY{n}{dot}
+        \PY{k+kn}{import} \PY{n+nn}{random} \PY{c+c1}{\PYZsh{} Dieses Modul wird verwendet um Zufallszahlen zu ziehen}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} \PY{c+c1}{\PYZsh{} Programmbibliothek die eine einfache Handhabung von Vektoren, Matrizen oder generell großen mehrdimensionalen Arrays ermöglicht}
+        \PY{k+kn}{import} \PY{n+nn}{math} \PY{c+c1}{\PYZsh{} Dieses Modul wird verwendet um Skalardaten zu berechnen, z. B. trigonometrische Berechnungen.}
+        \PY{k+kn}{import} \PY{n+nn}{operator} \PY{c+c1}{\PYZsh{} Programmbibliothek, welche die Ausgaben übersichtlicher gestaltet}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} \PY{c+c1}{\PYZsh{} Programmbibliothek die es erlaubt mathematische Darstellungen aller Art anzufertigen}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{patches} \PY{k}{as} \PY{n+nn}{mpatches}
+        \PY{k+kn}{from} \PY{n+nn}{riskmeasure\PYZus{}module} \PY{k}{import} \PY{n}{risk\PYZus{}measure} \PY{k}{as} \PY{n}{rm}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}\PY{p}{,} \PY{n}{HTML}
+\end{Verbatim}
+
+    Anschließend werden Einstellungen definiert, die die Formatierung der
+Ausgaben betreffen. Hierfür wird das Modul \texttt{operator} genutzt.
+Außerdem wird die Größe der Grafiken modifiziert, welche später
+angezeigt werden sollen.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{o}{\PYZpc{}}\PY{n+nx}{javascript}
+        \PY{n+nx}{IPython}\PY{p}{.}\PY{n+nx}{OutputArea}\PY{p}{.}\PY{n+nx}{auto\PYZus{}scroll\PYZus{}threshold} \PY{o}{=} \PY{l+m+mi}{9999}\PY{p}{;}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}style\PYZgt{}.container }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{ width:100}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{ !important; \PYZcb{}\PYZlt{}/style\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{=} \PY{l+m+mi}{115}
+        \PY{n}{centered} \PY{o}{=} \PY{n}{operator}\PY{o}{.}\PY{n}{methodcaller}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{SCREEN\PYZus{}WIDTH}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{figure.figsize}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}
+\end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \hypertarget{monte-carlo-simulation}{%
+\subsection{Monte-Carlo Simulation:}\label{monte-carlo-simulation}}
+
+\hypertarget{variablen-spezifizieren}{%
+\subsubsection{Variablen spezifizieren}\label{variablen-spezifizieren}}
+
+Im ersten Schritt werden die für die Simulation notwenigen Variablen
+definiert.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Anzahl Simulationsdurchläufe}
+        \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{10000}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Neue Randverteilungen (Gleichverteilung)}
+        \PY{n}{rand\PYZus{}x} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{]}
+        \PY{n}{rand\PYZus{}y} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Varianzen und Korrelation(en)}
+        \PY{n}{var\PYZus{}x} \PY{o}{=} \PY{l+m+mi}{4} 
+        \PY{n}{var\PYZus{}y} \PY{o}{=} \PY{l+m+mi}{9}
+        
+        \PY{n}{corr\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{std\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{var\PYZus{}x}\PY{p}{)}\PY{p}{,} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{var\PYZus{}y}\PY{p}{)}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Erwartungswerte}
+        \PY{n}{mu} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+\end{Verbatim}
+
+    \hypertarget{funktionen-definieren}{%
+\subsubsection{Funktionen definieren}\label{funktionen-definieren}}
+
+Als nächstes werden Funktionen definiert. Die erste Funktion berechnet
+aus den gegeben Varianzen und dazugehörigen Korrelationen die
+Varianz-Kovarianz-Matrix, die Zweite legt ein Array mit den gegebenen
+Varianzen an und die Dritte führt die Cholesky-Zerlegung auf der
+Grundlage Varianz-Kovarianz-Matrix durch. Die weiteren Funktionen
+vereinfachen das Plotten.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Definition einer Funktion, welche eine Varianz\PYZhy{}Kovarianz\PYZhy{}Matrix erstellt}
+        \PY{c+c1}{\PYZsh{} Argumente:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} std\PYZus{}list: Liste mit Standardabweichungen}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} corr\PYZus{}list: Liste mit Korrelationskoeffizienten}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{k}{def} \PY{n+nf}{var\PYZus{}covar\PYZus{}matrix\PYZus{}func}\PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{,} \PY{n}{corr\PYZus{}list}\PY{p}{)}\PY{p}{:}    
+            \PY{n}{counter\PYZus{}0}\PY{p}{,} \PY{n}{counter\PYZus{}1} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+            \PY{n}{len\PYZus{}std\PYZus{}list} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{)}
+            \PY{n}{array} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{len\PYZus{}std\PYZus{}list}\PY{p}{]} \PY{o}{*} \PY{n}{len\PYZus{}std\PYZus{}list}    
+            \PY{n}{val\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} Für jedes i und j in len\PYZus{}std\PYZus{}list..}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{len\PYZus{}std\PYZus{}list}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{len\PYZus{}std\PYZus{}list}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} Wenn i = j, dann multipliziere beide Werte}
+                    \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{n}{j}\PY{p}{:}
+                        \PY{n}{val} \PY{o}{=} \PY{n}{std\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{std\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                        \PY{n}{val\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{} Wenn i kleiner j, dann multipliziere beide Standardabweichungen}
+                    \PY{c+c1}{\PYZsh{} und die dazugehörige Korrelation}
+                    \PY{k}{if} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{j}\PY{p}{:}
+                        \PY{n}{val} \PY{o}{=} \PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{std\PYZus{}list}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{*} \PY{n}{corr\PYZus{}list}\PY{p}{[}\PY{n}{counter\PYZus{}0}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{counter\PYZus{}0} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{n}{val\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{} Wenn i größer j, dann multipliziere beide Standardabweichungen}
+                    \PY{c+c1}{\PYZsh{} und die dazugehörige Korrelation}
+                    \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}} \PY{n}{j}\PY{p}{:}
+                        \PY{n}{val} \PY{o}{=} \PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n}{std\PYZus{}list}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{*} \PY{n}{corr\PYZus{}list}\PY{p}{[}\PY{n}{counter\PYZus{}1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{counter\PYZus{}1} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{n}{val\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{p}{)}
+                        
+            \PY{n}{var\PYZus{}covar} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{val\PYZus{}list}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{len\PYZus{}std\PYZus{}list}\PY{p}{,} \PY{n}{len\PYZus{}std\PYZus{}list}\PY{p}{)}      
+            \PY{k}{return} \PY{n}{var\PYZus{}covar}
+            
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Definition einer Funktion, welche ein Varianz\PYZhy{}Array erstellt}
+        \PY{c+c1}{\PYZsh{} Argumente:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} std\PYZus{}list: Liste mit Standardabweichungen}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{k}{def} \PY{n+nf}{var\PYZus{}func}\PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{)}\PY{p}{:}    
+            \PY{n}{var\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}    
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{var} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+                \PY{n}{var\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{var}\PY{p}{)}        
+            \PY{k}{return} \PY{n}{var\PYZus{}list}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Definition einer Funktion, welche die Cholesky\PYZhy{}Zerlegung durchführt}
+        \PY{c+c1}{\PYZsh{} Argumente:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} var\PYZus{}covar: Varianz\PYZhy{}Kovarianz\PYZhy{}Array}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{k}{def} \PY{n+nf}{cholesky\PYZus{}func}\PY{p}{(}\PY{n}{var\PYZus{}covar}\PY{p}{)}\PY{p}{:}    
+            \PY{n}{cholesky} \PY{o}{=} \PY{n}{linalg}\PY{o}{.}\PY{n}{cholesky}\PY{p}{(}\PY{n}{var\PYZus{}covar}\PY{p}{,} \PY{n}{lower}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{k}{return} \PY{n}{cholesky}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Hilfsfunktionen zum Plotten}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Definition einer Funktion, welche eine gegebene Liste mit 2er\PYZhy{}Tuples in X\PYZhy{} und Y\PYZhy{}Realisationen splittet}
+        \PY{c+c1}{\PYZsh{} Argumente:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} liste: Liste mit 2er\PYZhy{}Tuple}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{k}{def} \PY{n+nf}{split\PYZus{}liste}\PY{p}{(}\PY{n}{liste}\PY{p}{)}\PY{p}{:}     
+            \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{liste}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x} \PY{o}{=} \PY{n}{liste}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{y} \PY{o}{=} \PY{n}{liste}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                \PY{n}{x\PYZus{}liste}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                \PY{n}{y\PYZus{}liste}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+                \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}        
+            \PY{k}{return} \PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Definition einer Funktion, welche die Grafiken plottet}
+        \PY{c+c1}{\PYZsh{} Argumente:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} x\PYZus{}liste: x\PYZhy{}Realisationen}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} y\PYZus{}liste:y\PYZhy{}Realisationen}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} show:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZgt{} Wenn True: Grafik wird unmittelbar darstellt}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZgt{} Wenn False: Grafik wird nicht unmittelbar darstellt}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} get\PYZus{}xy\PYZus{}lim:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZgt{} Wenn True: X\PYZhy{} und Y\PYZhy{} Kooridnaten werden ermittelt und die Grafik wird darauf begrenzt}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZgt{} Wenn False: Keine Anpassung der Koordinatenachsen}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}func}\PY{p}{(}\PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste}\PY{p}{,} \PY{n}{show}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{get\PYZus{}xy\PYZus{}lim}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste}\PY{p}{)}
+            
+            \PY{k}{if} \PY{n}{get\PYZus{}xy\PYZus{}lim} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}    
+                \PY{n}{left}\PY{p}{,} \PY{n}{right} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n}{right}\PY{p}{)}\PY{p}{)}   
+                \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n}{right}\PY{p}{)}     
+                \PY{n}{left}\PY{p}{,} \PY{n}{right} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n}{right}\PY{p}{)}\PY{p}{)} 
+                \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n}{right}\PY{p}{)}   
+                
+            \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Realisation X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Realisation Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                
+            \PY{k}{if} \PY{n}{show} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}       }
+        \PY{c+c1}{\PYZsh{} Definition einer Funktion, ein Histogramm plottet}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}        }
+        \PY{k}{def} \PY{n+nf}{hist\PYZus{}func}\PY{p}{(}\PY{n}{H}\PY{p}{,} \PY{n}{X1}\PY{p}{)}\PY{p}{:}
+            \PY{n}{dx} \PY{o}{=} \PY{n}{X1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{X1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{F1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{H}\PY{p}{)} \PY{o}{*} \PY{n}{dx}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{F1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Definition einer Funktion, welche eine Verteilungsfunktion plottet}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}    }
+        \PY{k}{def} \PY{n+nf}{verteilung\PYZus{}func}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Verteilung X+Y, Realisationen gleichverteilte X,Y mit Gauss\PYZhy{}Copula}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{blue\PYZus{}patch} \PY{o}{=} \PY{n}{mpatches}\PY{o}{.}\PY{n}{Patch}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Monte\PYZhy{}Carlo\PYZhy{}Simulation(en)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{handles}\PY{o}{=}\PY{p}{[}\PY{n}{blue\PYZus{}patch}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PF\PYZhy{}Realisation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wahrscheinlichkeit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{left}\PY{p}{,} \PY{n}{right} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n}{right}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n}{right}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{funktion-fuxfcr-die-monte-carlo-simulation-definieren}{%
+\subsubsection{Funktion für die Monte-Carlo-Simulation
+definieren}\label{funktion-fuxfcr-die-monte-carlo-simulation-definieren}}
+
+Nun wird eine Funktion definiert, in welcher die Simulation durchgeführt
+wird. Dabei werden zunächst zwei gleichverteilte Pseudo-Zufallsvariablen
+generiert, welche anschließend in unabhängige standardnormalverteilte
+Zufallsvariablen transformiert werden. Letztere werden unter Anwendung
+der Cholesky-Zerlegung in abhängige standardnormalverteilte
+Zufallsvariablen überführt. Danach werden diese unter Anwendung der oben
+gegebenen Standardabweichungen und der gegebenen Erwartungswerte in
+Realisationen der Gauss-Copula überführt, bevor auf diese anschließend
+die neuen Randverteilungen angewendet werden. Zum Schluss wird die Summe
+aus beiden Realisationen gebildet, welche den Portfolio-Wert ergibt.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Definition einer Funktion, welche die Monte\PYZhy{}Carlo\PYZhy{}Sumulation durchführt}
+        \PY{c+c1}{\PYZsh{} Argumente:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} simulation\PYZus{}runs: Anzahl an Durchläufen der Simulation}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} randverteilung\PYZus{}x: Neue Randverteilung der Variablen X}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} randverteilung\PYZus{}y: Neue Randverteilung der Variablen Y}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} mu\PYZus{}list: Liste mit Erwartungswerten}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} std\PYZus{}list: Liste mit Standardabweichungen}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} corr\PYZus{}list: Liste mit Korrelationen}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} m: Anzahl der Variablen die pro Lauf gezogen werden (hier gerade nur zwei möglich)}
+        \PY{c+c1}{\PYZsh{} \PYZhy{} full\PYZus{}log:}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZgt{} Wenn True: Alle berechneten Größen werden den Listen angefügt}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZgt{} Wenn False: Nur die Summe (das letztendliche Ergebnis der Simulation) der Realisationen wird einer Liste angefügt}
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{k}{def} \PY{n+nf}{copula\PYZus{}sim}\PY{p}{(}\PY{n}{simulation\PYZus{}runs}\PY{p}{,} \PY{n}{randverteilung\PYZus{}x}\PY{p}{,} \PY{n}{randverteilung\PYZus{}y}\PY{p}{,} \PY{n}{mu\PYZus{}list}\PY{p}{,} \PY{n}{std\PYZus{}list}\PY{p}{,} \PY{n}{corr\PYZus{}list}\PY{p}{,} \PY{n}{m}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{full\PYZus{}log}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} Listen für die zu berechnenden Größen}
+            \PY{n}{total\PYZus{}standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{,} \PY{n}{total\PYZus{}realisation\PYZus{}cop\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+            \PY{n}{total\PYZus{}xy\PYZus{}list}\PY{p}{,} \PY{n}{total\PYZus{}summe\PYZus{}liste} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} Funktionen aufrufen um die für die folgenden Berechnungen nötige Werte zu erhalten}
+            \PY{n}{var\PYZus{}covar} \PY{o}{=} \PY{n}{var\PYZus{}covar\PYZus{}matrix\PYZus{}func}\PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{,} \PY{n}{corr\PYZus{}list}\PY{p}{)}
+            \PY{n}{var\PYZus{}list} \PY{o}{=} \PY{n}{var\PYZus{}func}\PY{p}{(}\PY{n}{std\PYZus{}list}\PY{p}{)}
+            \PY{n}{cholesky} \PY{o}{=} \PY{n}{cholesky\PYZus{}func}\PY{p}{(}\PY{n}{var\PYZus{}covar}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Durchführung der n Durchläufe}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{simulation\PYZus{}runs}\PY{p}{)}\PY{p}{:}        
+                \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                \PY{c+c1}{\PYZsh{} Gleichverteilte Zufallsvariablen ziehen        }
+                \PY{n}{random\PYZus{}ZV\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}  
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{x} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{random\PYZus{}ZV\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                \PY{k}{if} \PY{n}{simulation\PYZus{}runs} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1) Gleichverteilte Zufallsvariablen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{random\PYZus{}ZV\PYZus{}list}\PY{p}{)}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                \PY{c+c1}{\PYZsh{} Transformation der gleichverteilten Zufallsvariablen in unabhängige standardnormalverteilte Zufallsvariablen}
+                \PY{n}{standard\PYZus{}norm\PYZus{}list} \PY{o}{=} \PY{n}{norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{n}{random\PYZus{}ZV\PYZus{}list}\PY{p}{)}   
+                \PY{k}{if} \PY{n}{simulation\PYZus{}runs} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2) Standardnormalverteilte Zufallsvariablen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{standard\PYZus{}norm\PYZus{}list}\PY{p}{)}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                \PY{c+c1}{\PYZsh{} Transformation in standardnormalverteilte abhängige Zufallsvariablen        }
+                \PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{counter\PYZus{}cholesky\PYZus{}0}\PY{p}{,} \PY{n}{counter\PYZus{}cholesky\PYZus{}1} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+                \PY{n}{counter\PYZus{}mu}\PY{p}{,} \PY{n}{counter\PYZus{}standard\PYZus{}norm\PYZus{}list} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+        
+                \PY{c+c1}{\PYZsh{} Für jede zuvor gezogene unabhängige, standardnormalverteilte Zufallsvariable }
+                \PY{c+c1}{\PYZsh{} wird die innere Abhänigkeitsstruktur (aus der Cholesky\PYZhy{}Matrix) auf diese Zufallsvariable übertragen}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} 1. Schritt: Berechnung a, mit a = 1. unabhängige standardnormalverteilte Zufallsvariable * Eintrag in Cholesky\PYZhy{}Matrix}
+                    \PY{n}{a} \PY{o}{=} \PY{n}{cholesky}\PY{p}{[}\PY{n}{counter\PYZus{}cholesky\PYZus{}0}\PY{p}{]}\PY{p}{[}\PY{n}{counter\PYZus{}cholesky\PYZus{}1}\PY{p}{]} \PY{o}{*} \PY{n}{standard\PYZus{}norm\PYZus{}list}\PY{p}{[}\PY{n}{counter\PYZus{}standard\PYZus{}norm\PYZus{}list}\PY{p}{]}
+                    \PY{n}{counter\PYZus{}cholesky\PYZus{}1} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                    \PY{n}{counter\PYZus{}standard\PYZus{}norm\PYZus{}list} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        
+                    \PY{c+c1}{\PYZsh{} 2. Schritt: Berechnung b, mit b = 2. unabhängige standardnormalverteilte Zufallsvariable * Eintrag in Cholesky\PYZhy{}Matrix}
+                    \PY{n}{b} \PY{o}{=} \PY{n}{cholesky}\PY{p}{[}\PY{n}{counter\PYZus{}cholesky\PYZus{}0}\PY{p}{]}\PY{p}{[}\PY{n}{counter\PYZus{}cholesky\PYZus{}1}\PY{p}{]} \PY{o}{*} \PY{n}{standard\PYZus{}norm\PYZus{}list}\PY{p}{[}\PY{n}{counter\PYZus{}standard\PYZus{}norm\PYZus{}list}\PY{p}{]}
+                    \PY{n}{counter\PYZus{}cholesky\PYZus{}0} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}  
+                    \PY{n}{counter\PYZus{}cholesky\PYZus{}1} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n}{counter\PYZus{}standard\PYZus{}norm\PYZus{}list} \PY{o}{=} \PY{l+m+mi}{0}  
+        
+                    \PY{c+c1}{\PYZsh{} 3. Schritt: Endergebnis r ist der Erwartungswert + a + b und stellt die abhängige standardnormalverteilte Zufallsvariable dar}
+                    \PY{n}{r} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b} \PY{o}{+} \PY{n}{mu\PYZus{}list}\PY{p}{[}\PY{n}{counter\PYZus{}mu}\PY{p}{]}
+                    \PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r}\PY{p}{)}
+                    \PY{n}{counter\PYZus{}mu} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{if} \PY{n}{simulation\PYZus{}runs} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3) Standardnormalverteilte abhängige Zufallsvariablen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{)}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                \PY{c+c1}{\PYZsh{} Transformation Realisationen der Gauss\PYZhy{}Copula}
+                \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{realisation\PYZus{}cop\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}     
+                \PY{c+c1}{\PYZsh{} Transformation indem von jeweiliger abhängiger standardnormalverteilter Zufallsvariablen}
+                \PY{c+c1}{\PYZsh{} der dazugehörige Erwartungswert subtrahiert wird, und dieses Ergebnis dann durch die dazugehörige Standardabweichung geteilt wird}
+                \PY{c+c1}{\PYZsh{} Die Realisation der Gauss\PYZhy{}Copula ergibt sich dann als der Wert (Wahrscheinlichkeit) der kumulierten Normalverteilungsfunktion}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{r\PYZus{}cop} \PY{o}{=} \PY{p}{(}\PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{[}\PY{n}{counter}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}list}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{var\PYZus{}list}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{p}{)}   
+                    \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{st}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{r\PYZus{}cop}\PY{p}{)}
+                    \PY{n}{realisation\PYZus{}cop\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{p\PYZus{}value}\PY{p}{)}
+                    \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{if} \PY{n}{simulation\PYZus{}runs} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4) Realisationen der Gauss\PYZhy{}Copula: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{realisation\PYZus{}cop\PYZus{}list}\PY{p}{)}\PY{p}{)}
+                    
+                \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                \PY{c+c1}{\PYZsh{} Gemeinsame Verteilung: Übertragung der neuen Ränder auf die ermittelte Abhängigkeitsstruktur  }
+                \PY{c+c1}{\PYZsh{} Für x und y wird jeweils (Obergrenze \PYZhy{} Untergrenze) * Realisation der Gauss\PYZhy{}Copula + Untergrenze gerechnet}
+                \PY{c+c1}{\PYZsh{} Dabei sind Obergrenze bzw. Untergrenze der linke bzw. rechte Rand des Intervalls der neuen Randverteilungen}
+                \PY{n}{x} \PY{o}{=} \PY{p}{(}\PY{n}{randverteilung\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{randverteilung\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{realisation\PYZus{}cop\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{randverteilung\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                \PY{n}{y} \PY{o}{=} \PY{p}{(}\PY{n}{randverteilung\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{randverteilung\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{realisation\PYZus{}cop\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{randverteilung\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{} Die Summe bzw. das Endergebnis der Simulation ist dann X + Y, also die gemeinsame Realisation}
+                \PY{n}{summe} \PY{o}{=} \PY{n}{x} \PY{o}{+} \PY{n}{y} 
+                \PY{k}{if} \PY{n}{simulation\PYZus{}runs} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5) Sumulationsergebnisse: x=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, y=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, Summe=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{summe}\PY{p}{)}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Berechnete Werte werden den jeweiligen Listen angefügt}
+                \PY{k}{if} \PY{n}{full\PYZus{}log} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                    \PY{n}{total\PYZus{}standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{)}
+                    \PY{n}{total\PYZus{}realisation\PYZus{}cop\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{realisation\PYZus{}cop\PYZus{}list}\PY{p}{)}
+                    \PY{n}{total\PYZus{}xy\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)}
+                \PY{n}{total\PYZus{}summe\PYZus{}liste}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{summe}\PY{p}{)}        
+          
+            \PY{k}{return} \PY{n}{total\PYZus{}standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{,} \PY{n}{total\PYZus{}realisation\PYZus{}cop\PYZus{}list}\PY{p}{,} \PY{n}{total\PYZus{}xy\PYZus{}list}\PY{p}{,} \PY{n}{total\PYZus{}summe\PYZus{}liste}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{copula\PYZus{}sim}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{rand\PYZus{}x}\PY{p}{,} \PY{n}{rand\PYZus{}y}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{std\PYZus{}list}\PY{p}{,} \PY{n}{corr\PYZus{}list}\PY{p}{,} \PY{n}{full\PYZus{}log}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1) Gleichverteilte Zufallsvariablen: [0.40195872330818816, 0.5547450117792724]
+
+2) Standardnormalverteilte Zufallsvariablen: [-0.24828042  0.13765893]
+
+3) Standardnormalverteilte abhängige Zufallsvariablen: [1.503439158025408, 3.4129768012545965]
+
+4) Realisationen der Gauss-Copula: [0.4019587233081881, 0.5547450117792724]
+
+5) Sumulationsergebnisse: x=15.980412766918118, y=14.233569835090186, Summe=30.213982602008304
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{total\PYZus{}standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{,} \PY{n}{total\PYZus{}realisation\PYZus{}cop\PYZus{}list}\PY{p}{,} \PY{n}{total\PYZus{}xy\PYZus{}list}\PY{p}{,} \PY{n}{total\PYZus{}summe\PYZus{}liste} \PY{o}{=} \PY{n}{copula\PYZus{}sim}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{rand\PYZus{}x}\PY{p}{,} \PY{n}{rand\PYZus{}y}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{std\PYZus{}list}\PY{p}{,} \PY{n}{corr\PYZus{}list}\PY{p}{,} \PY{n}{full\PYZus{}log}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{graphische-ausgaben}{%
+\subsection{Graphische Ausgaben:}\label{graphische-ausgaben}}
+
+\hypertarget{realisationen-abhuxe4ngiger-bivariat-normalverteilter-zufallsvariablen}{%
+\subsubsection{Realisationen abhängiger bivariat normalverteilter
+Zufallsvariablen}\label{realisationen-abhuxe4ngiger-bivariat-normalverteilter-zufallsvariablen}}
+
+Die Zufallsvariablen \(x\) und \(y\) streuen mit der Varianz
+\(\sigma_x\) bzw. \(\sigma_y\) um ihren jeweiligen Erwartungswert
+\(\mu_x\) bzw. \(\mu_y\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste} \PY{o}{=} \PY{n}{split\PYZus{}liste}\PY{p}{(}\PY{n}{total\PYZus{}standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{)} \PY{c+c1}{\PYZsh{} X\PYZhy{} und Y\PYZhy{}Realisationen aus gemeinsamer Liste extrahieren}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Realisationen abhängiger bivariat normalverteilter Zufallsvariablen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Spezifischer Titel}
+        \PY{n}{plot\PYZus{}func}\PY{p}{(}\PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste}\PY{p}{,} \PY{n}{show}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{get\PYZus{}xy\PYZus{}lim}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} Plot erzeugen und anzeigen}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{realisationen-gauss-copula}{%
+\subsection{Realisationen
+Gauss-Copula}\label{realisationen-gauss-copula}}
+
+Darstellung der inneren Abhänigkeitsstruktur ohne die (alten)
+Randverteilungen. Diese Realisationen lassen sich als
+Wahrscheinlichkeiten interpretieren.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste} \PY{o}{=} \PY{n}{split\PYZus{}liste}\PY{p}{(}\PY{n}{total\PYZus{}realisation\PYZus{}cop\PYZus{}list}\PY{p}{)} \PY{c+c1}{\PYZsh{} X\PYZhy{} und Y\PYZhy{}Realisationen aus gemeinsamer Liste extrahieren}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Realisationen Gauss\PYZhy{}Copula}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Spezifischer Titel}
+         \PY{n}{plot\PYZus{}func}\PY{p}{(}\PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste}\PY{p}{,} \PY{n}{show}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{get\PYZus{}xy\PYZus{}lim}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} Plot erzeugen und anzeigen}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{realisationen-gleichverteilte-x-y-mit-gauss-copula}{%
+\subsection{Realisationen gleichverteilte X, Y mit
+Gauss-Copula}\label{realisationen-gleichverteilte-x-y-mit-gauss-copula}}
+
+Die innere Abhängikeitsstruktur wurde auf die neuen Randverteilungen
+übertragen.\\
+Die Realisationen sind auf das Intervall \([18,42]\) beschränkt (siehe
+rand\_y, rand\_y), da dies die gemeinsame Ober- bzw. Untergrenze der
+vorgegebenen neuen Randverteilungen ist.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste} \PY{o}{=} \PY{n}{split\PYZus{}liste}\PY{p}{(}\PY{n}{total\PYZus{}xy\PYZus{}list}\PY{p}{)} \PY{c+c1}{\PYZsh{} X\PYZhy{} und Y\PYZhy{}Realisationen aus gemeinsamer Liste extrahieren}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Realisationen gleichverteilte X, Y mit Gauss\PYZhy{}Copula}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Spezifischer Titel}
+         \PY{n}{plot\PYZus{}func}\PY{p}{(}\PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste}\PY{p}{,} \PY{n}{show}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{get\PYZus{}xy\PYZus{}lim}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} Plot erzeugen und anzeigen}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{histogramm-xy-realisationen-gleichverteilte-x-y-mit-gauss-copula}{%
+\subsection{Histogramm X+Y, Realisationen gleichverteilte X, Y mit
+Gauss-Copula}\label{histogramm-xy-realisationen-gleichverteilte-x-y-mit-gauss-copula}}
+
+Darstellung der Simulationsergebnisse als Summe der \(x\) und \(y\)
+Realisationen unter Berücksichtung inneren Abhänigkeitsstruktur und
+neuen Randverteilungen. Es zeigt sich ein auf das Intervall \([18,42]\)
+beschränkter glockenförmiger Verlauf, wie er für eine Normalverteilung
+üblich ist.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{71}
+         \PY{n}{data} \PY{o}{=} \PY{n}{total\PYZus{}summe\PYZus{}liste}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Histogram X+Y, Realisationen gleichverteilte X,Y mit Gauss\PYZhy{}Copula}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PF\PYZhy{}Realisation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Anzahl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{verteilung-xy-realisationen-gleichverteilte-x-y-mit-gauss-copula}{%
+\subsection{Verteilung X+Y, Realisationen gleichverteilte X, Y mit
+Gauss-Copula}\label{verteilung-xy-realisationen-gleichverteilte-x-y-mit-gauss-copula}}
+
+Darstellung der resultierenden kumulativen Verteilungsfunktion. Diese
+nimmt, wie für eine Normalverteilung üblich, einen S-förmigen Verlauf.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{H}\PY{p}{,} \PY{n}{X1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{histogram}\PY{p}{(}\PY{n}{total\PYZus{}summe\PYZus{}liste}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{n}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{hist\PYZus{}func}\PY{p}{(}\PY{n}{H}\PY{p}{,} \PY{n}{X1}\PY{p}{)}
+         \PY{n}{verteilung\PYZus{}func}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{risikomauxdfe-schuxe4tzen}{%
+\subsection{Risikomaße schätzen:}\label{risikomauxdfe-schuxe4tzen}}
+
+\hypertarget{parameterfestlegung-und-aufruf-der-funktionen}{%
+\subsubsection{Parameterfestlegung und Aufruf der
+Funktionen}\label{parameterfestlegung-und-aufruf-der-funktionen}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Nutzung der objektorientierten Programmierung }
+         \PY{n}{x} \PY{o}{=} \PY{n}{rm}\PY{p}{(}\PY{n}{total\PYZus{}summe\PYZus{}liste}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Value at Risk}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Der VaR beträgt: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{VaR}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Conditional Value at Risk}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Der CVaR beträgt: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{CVaR}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Power\PYZhy{}Spektrales Risikomaß}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Power\PYZhy{}Spektrales Risikomaß bei der Monte\PYZhy{}Carlo\PYZhy{}Simulation:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Der Erwartungswert beträgt: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{expected\PYZus{}value}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Das Risiko beträgt: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{Power}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\#-------------------------------------------------------------------------------------------------------------------\#
+|                                        Der VaR beträgt: -23.4076759890292.                                        | 
+\#-------------------------------------------------------------------------------------------------------------------\#
+|                                       Der CVaR beträgt: -21.58008721670611.                                       | 
+\#-------------------------------------------------------------------------------------------------------------------\#
+|                             Power-Spektrales Risikomaß bei der Monte-Carlo-Simulation:                            | 
+\#-------------------------------------------------------------------------------------------------------------------\#
+|                                   Der Erwartungswert beträgt: 30.00389831202371.                                  | 
+|                                       Das Risiko beträgt: 26.83089017748455.                                      | 
+\#-------------------------------------------------------------------------------------------------------------------\#
+
+    \end{Verbatim}
+
+    \hypertarget{instabilituxe4t-monte-carlo-simulation}{%
+\subsection{``Instabilität''
+Monte-Carlo-Simulation}\label{instabilituxe4t-monte-carlo-simulation}}
+
+Ein Kritikpunkt an der Monte-Carlo-Simulation ist, dass das Ergebnis des
+Verfahrens großen Schwankungen unterliegen kann, sofern nur wenige
+Realisationen in einem Simulationslauf simuliert werden. Dies soll die
+folgende Grafik veranschaulichen. Dabei kann sowohl die Anzahl der
+Simulationsläufe als auch die Anzahl der in jeder Simulation
+durchgeführten Simulationen variiert werden.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Parameter Risikomaße}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{gamma} \PY{o}{=} \PY{l+m+mf}{0.5}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Wiederholungen der Simulationen}
+         \PY{n}{runs\PYZus{}sim} \PY{o}{=} \PY{l+m+mi}{100} \PY{c+c1}{\PYZsh{} Legt die Anzahl der Durchläufe einer Simulation fest}
+         \PY{n}{runs\PYZus{}func} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} Legt fest, wie viele Simulationen durchgeführt werden}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{n}{RM\PYZus{}VaR\PYZus{}list}\PY{p}{,} \PY{n}{RM\PYZus{}CVaR\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+         \PY{n}{RM\PYZus{}PSRM\PYZus{}list}\PY{p}{,} \PY{n}{mega\PYZus{}summe\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Führe die Simulation \PYZdq{}runs\PYZus{}func mal\PYZdq{} durch und speichere die Ergebnisse in der jeweiligen Liste}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{runs\PYZus{}func}\PY{p}{)}\PY{p}{:}
+             \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{total\PYZus{}summe\PYZus{}liste} \PY{o}{=} \PY{n}{copula\PYZus{}sim}\PY{p}{(}\PY{n}{runs\PYZus{}sim}\PY{p}{,} \PY{n}{rand\PYZus{}x}\PY{p}{,} \PY{n}{rand\PYZus{}y}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{std\PYZus{}list}\PY{p}{,} \PY{n}{corr\PYZus{}list}\PY{p}{,} \PY{n}{full\PYZus{}log}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{mega\PYZus{}summe\PYZus{}list} \PY{o}{+}\PY{o}{=} \PY{n}{total\PYZus{}summe\PYZus{}liste}
+             \PY{n}{x} \PY{o}{=} \PY{n}{rm}\PY{p}{(}\PY{n}{total\PYZus{}summe\PYZus{}liste}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{gamma}\PY{p}{)}    
+             \PY{n}{RM\PYZus{}VaR\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{VaR}\PY{p}{(}\PY{p}{)}\PY{p}{)}    
+             \PY{n}{RM\PYZus{}CVaR\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{CVaR}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{RM\PYZus{}PSRM\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{Power}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Erzeuge ein DataFrame mit den Simulationsvergebnissen}
+         \PY{c+c1}{\PYZsh{} und deren prozentualen Änderung vom jeweils vorherigen Ergebnis}
+         \PY{n}{RM\PYZus{}frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VaR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RM\PYZus{}VaR\PYZus{}list}
+         \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VaR\PYZhy{}Change}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VaR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
+         \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CVaR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RM\PYZus{}CVaR\PYZus{}list}
+         \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CVaR\PYZhy{}Change}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CVaR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
+         \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Power}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RM\PYZus{}PSRM\PYZus{}list}
+         \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Power\PYZhy{}Change}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RM\PYZus{}frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Power}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{pct\PYZus{}change}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Ermittle die kleinste und größte Relaisation des jweiligen Risikomaßes}
+         \PY{n}{Min\PYZus{}Max\PYZus{}VaR} \PY{o}{=} \PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{RM\PYZus{}VaR\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{RM\PYZus{}VaR\PYZus{}list}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Min\PYZus{}Max\PYZus{}CVaR} \PY{o}{=} \PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{RM\PYZus{}CVaR\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{RM\PYZus{}CVaR\PYZus{}list}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Min\PYZus{}Max\PYZus{}PSRM} \PY{o}{=} \PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{RM\PYZus{}PSRM\PYZus{}list}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{RM\PYZus{}PSRM\PYZus{}list}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Gib den DataFrame und die Infos zurück}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[INFO] Der DataFrame mit den auf den auf }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{runs\PYZus{}func}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ mal }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{runs\PYZus{}sim}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Durchläufen beruhenden Risikomaßen ergibt sich wie folgt: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{RM\PYZus{}frame}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nach }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{runs\PYZus{}func}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Simulationsläufen mit je }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{runs\PYZus{}sim}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Durchläufen beträgt der kleinste VaR }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}VaR}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, der größte }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}VaR}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ (}\PY{l+s+se}{\PYZbs{}u0394}\PY{l+s+s1}{ = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}VaR}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{Min\PYZus{}Max\PYZus{}VaR}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{).}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nach }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{runs\PYZus{}func}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Simulationsläufen mit je }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{runs\PYZus{}sim}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Durchläufen beträgt der kleinste CVaR }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}CVaR}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, der größte }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}CVaR}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ (}\PY{l+s+se}{\PYZbs{}u0394}\PY{l+s+s1}{ = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}CVaR}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{Min\PYZus{}Max\PYZus{}CVaR}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{).}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nach }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{runs\PYZus{}func}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Simulationsläufen mit je }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{runs\PYZus{}sim}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Durchläufen beträgt das kleinste P\PYZhy{}SRM }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}PSRM}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, das größte }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}PSRM}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ (}\PY{l+s+se}{\PYZbs{}u0394}\PY{l+s+s1}{ = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{Min\PYZus{}Max\PYZus{}PSRM}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{Min\PYZus{}Max\PYZus{}PSRM}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{).}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Zerlege die mega\PYZus{}summe\PYZus{}list (beinhaltet alle Ergenisse) in Teillisten,}
+         \PY{c+c1}{\PYZsh{} welche die Ergebnisse der einzelnen Simulationsläufe beinhalten}
+         \PY{n}{counter\PYZus{}0}\PY{p}{,} \PY{n}{counter\PYZus{}1} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{runs\PYZus{}sim}
+         \PY{n}{array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{runs\PYZus{}func}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{mega\PYZus{}summe\PYZus{}list}\PY{p}{[}\PY{n}{counter\PYZus{}0}\PY{p}{:}\PY{n}{counter\PYZus{}1}\PY{p}{]}
+             \PY{n}{array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{n}{counter\PYZus{}0} \PY{o}{+}\PY{o}{=} \PY{n}{runs\PYZus{}sim}
+             \PY{n}{counter\PYZus{}1} \PY{o}{+}\PY{o}{=} \PY{n}{runs\PYZus{}sim}
+         
+         \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Erstelle für jedes Dieser Teillisten ein Histogramm}
+         \PY{c+c1}{\PYZsh{} und plotte anschlißend das Ergebnis}
+         \PY{k}{for} \PY{n}{items} \PY{o+ow}{in} \PY{n}{array}\PY{p}{:}
+             \PY{n}{values\PYZus{}PF} \PY{o}{=} \PY{n}{items}
+             \PY{n}{bins} \PY{o}{=} \PY{n}{runs\PYZus{}sim}    
+             \PY{n}{H}\PY{p}{,} \PY{n}{X1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{histogram}\PY{p}{(}\PY{n}{values\PYZus{}PF}\PY{p}{,} \PY{n}{bins}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{hist\PYZus{}func}\PY{p}{(}\PY{n}{H}\PY{p}{,} \PY{n}{X1}\PY{p}{)}
+         \PY{n}{verteilung\PYZus{}func}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\#-------------------------------------------------------------------------------------------------------------------\#
+|   [INFO] Der DataFrame mit den auf den auf 10 mal 100 Durchläufen beruhenden Risikomaßen ergibt sich wie folgt:   | 
+\#-------------------------------------------------------------------------------------------------------------------\#
+         VaR  VaR-Change       CVaR  CVaR-Change      Power  Power-Change
+0 -22.330991         NaN -21.071164          NaN  26.820230           NaN
+1 -23.642555    0.058733 -21.376833     0.014507  26.607497     -0.007932
+2 -22.568408   -0.045433 -20.699304    -0.031695  25.943138     -0.024969
+3 -22.980029    0.018239 -21.760669     0.051275  26.816375      0.033660
+4 -23.556927    0.025104 -21.895559     0.006199  26.359509     -0.017037
+5 -24.500979    0.040075 -22.357867     0.021114  27.148708      0.029940
+6 -23.204382   -0.052920 -22.089899    -0.011985  26.747490     -0.014779
+7 -24.026181    0.035416 -21.949410    -0.006360  26.685129     -0.002331
+8 -23.754698   -0.011299 -21.525206    -0.019326  27.193393      0.019047
+9 -23.033860   -0.030345 -21.903526     0.017576  27.003647     -0.006978
+\#-------------------------------------------------------------------------------------------------------------------\#
+|  Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt der kleinste VaR -24.5, der größte -22.33 (Δ = 9.72\%).  | 
+|  Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt der kleinste CVaR -22.36, der größte -20.7 (Δ = 8.01\%). | 
+|  Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt das kleinste P-SRM 25.94, das größte 27.19 (Δ = -4.6\%). | 
+\#-------------------------------------------------------------------------------------------------------------------\#
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

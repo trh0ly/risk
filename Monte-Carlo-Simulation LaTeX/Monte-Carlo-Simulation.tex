@@ -295,7 +295,7 @@
     \hypertarget{monte-carlo-simulation}{%
 \section{Monte-Carlo-Simulation}\label{monte-carlo-simulation}}
 
-© Thomas Robert Holy 2019 Version 1.1.1 Visit me on GitHub:
+© Thomas Robert Holy 2019 Version 1.1.2 Visit me on GitHub:
 https://github.com/trh0ly \#\# Grundlegende Einstellungen: Zunächst
 müssen die notwendigen Pakete (auch Module) importiert werden, damit auf
 diese zugegriffen werden kann.
@@ -529,15 +529,15 @@ vereinfachen das Plotten.
 definieren}\label{funktion-fuxfcr-die-monte-carlo-simulation-definieren}}
 
 Nun wird eine Funktion definiert, in welcher die Simulation durchgeführt
-wird. Dabei werden zunächst zwei gleichverteilte Pseudo-Zufallsvariablen
+wird. Dabei werden zunächst zwei gleichverteilte Pseudo-Zufallszahlen
 generiert, welche anschließend in unabhängige standardnormalverteilte
-Zufallsvariablen transformiert werden. Letztere werden unter Anwendung
-der Cholesky-Zerlegung in abhängige standardnormalverteilte
-Zufallsvariablen überführt. Danach werden diese unter Anwendung der oben
-gegebenen Standardabweichungen und der gegebenen Erwartungswerte in
-Realisationen der Gauss-Copula überführt, bevor auf diese anschließend
-die neuen Randverteilungen angewendet werden. Zum Schluss wird die Summe
-aus beiden Realisationen gebildet, welche den Portfolio-Wert ergibt.
+Zufallszahlen transformiert werden. Letztere werden unter Anwendung der
+Cholesky-Zerlegung in abhängige standardnormalverteilte Zufallszahlen
+überführt. Danach werden diese unter Anwendung der oben gegebenen
+Standardabweichungen und der gegebenen Erwartungswerte in Realisationen
+der Gauss-Copula überführt, bevor auf diese anschließend die neuen
+Randverteilungen angewendet werden. Zum Schluss wird die Summe aus
+beiden Realisationen gebildet, welche den Portfolio-Wert ergibt.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Definition einer Funktion, welche die Monte\PYZhy{}Carlo\PYZhy{}Sumulation durchführt}
@@ -567,28 +567,28 @@ aus beiden Realisationen gebildet, welche den Portfolio-Wert ergibt.
             \PY{c+c1}{\PYZsh{} Durchführung der n Durchläufe}
             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{simulation\PYZus{}runs}\PY{p}{)}\PY{p}{:}        
                 \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
-                \PY{c+c1}{\PYZsh{} Gleichverteilte Zufallsvariablen ziehen        }
+                \PY{c+c1}{\PYZsh{} Gleichverteilte Zufallszahlen ziehen        }
                 \PY{n}{random\PYZus{}ZV\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}  
                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{:}
                     \PY{n}{x} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)}
                     \PY{n}{random\PYZus{}ZV\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
                 \PY{k}{if} \PY{n}{simulation\PYZus{}runs} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
-                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1) Gleichverteilte Zufallsvariablen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{random\PYZus{}ZV\PYZus{}list}\PY{p}{)}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1) Gleichverteilte Zufallszahlen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{random\PYZus{}ZV\PYZus{}list}\PY{p}{)}\PY{p}{)}
                 
                 \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
-                \PY{c+c1}{\PYZsh{} Transformation der gleichverteilten Zufallsvariablen in unabhängige standardnormalverteilte Zufallsvariablen}
+                \PY{c+c1}{\PYZsh{} Transformation der gleichverteilten Zufallszahlen in unabhängige standardnormalverteilte Zufallszahlen}
                 \PY{n}{standard\PYZus{}norm\PYZus{}list} \PY{o}{=} \PY{n}{norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{n}{random\PYZus{}ZV\PYZus{}list}\PY{p}{)}   
                 \PY{k}{if} \PY{n}{simulation\PYZus{}runs} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
-                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2) Standardnormalverteilte Zufallsvariablen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{standard\PYZus{}norm\PYZus{}list}\PY{p}{)}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2) Standardnormalverteilte Zufallszahlen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{standard\PYZus{}norm\PYZus{}list}\PY{p}{)}\PY{p}{)}
                 
                 \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
-                \PY{c+c1}{\PYZsh{} Transformation in standardnormalverteilte abhängige Zufallsvariablen        }
+                \PY{c+c1}{\PYZsh{} Transformation in standardnormalverteilte abhängige Zufallszahlen        }
                 \PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
                 \PY{n}{counter\PYZus{}cholesky\PYZus{}0}\PY{p}{,} \PY{n}{counter\PYZus{}cholesky\PYZus{}1} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
                 \PY{n}{counter\PYZus{}mu}\PY{p}{,} \PY{n}{counter\PYZus{}standard\PYZus{}norm\PYZus{}list} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
         
-                \PY{c+c1}{\PYZsh{} Für jede zuvor gezogene unabhängige, standardnormalverteilte Zufallsvariable }
-                \PY{c+c1}{\PYZsh{} wird die innere Abhänigkeitsstruktur (aus der Cholesky\PYZhy{}Matrix) auf diese Zufallsvariable übertragen}
+                \PY{c+c1}{\PYZsh{} Für jede zuvor gezogene unabhängige, standardnormalverteilte Zufallszahlen }
+                \PY{c+c1}{\PYZsh{} wird die Abhänigkeitsstruktur (aus der Cholesky\PYZhy{}Matrix) auf diese Zufallszahlen übertragen}
                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{:}
                     \PY{c+c1}{\PYZsh{} 1. Schritt: Berechnung a, mit a = 1. unabhängige standardnormalverteilte Zufallsvariable * Eintrag in Cholesky\PYZhy{}Matrix}
                     \PY{n}{a} \PY{o}{=} \PY{n}{cholesky}\PY{p}{[}\PY{n}{counter\PYZus{}cholesky\PYZus{}0}\PY{p}{]}\PY{p}{[}\PY{n}{counter\PYZus{}cholesky\PYZus{}1}\PY{p}{]} \PY{o}{*} \PY{n}{standard\PYZus{}norm\PYZus{}list}\PY{p}{[}\PY{n}{counter\PYZus{}standard\PYZus{}norm\PYZus{}list}\PY{p}{]}
@@ -606,13 +606,13 @@ aus beiden Realisationen gebildet, welche den Portfolio-Wert ergibt.
                     \PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r}\PY{p}{)}
                     \PY{n}{counter\PYZus{}mu} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
                 \PY{k}{if} \PY{n}{simulation\PYZus{}runs} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
-                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3) Standardnormalverteilte abhängige Zufallsvariablen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{)}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3) Standardnormalverteilte abhängige Zufallszahlen: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{)}\PY{p}{)}
         
                 \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
                 \PY{c+c1}{\PYZsh{} Transformation Realisationen der Gauss\PYZhy{}Copula}
                 \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
                 \PY{n}{realisation\PYZus{}cop\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}     
-                \PY{c+c1}{\PYZsh{} Transformation indem von jeweiliger abhängiger standardnormalverteilter Zufallsvariablen}
+                \PY{c+c1}{\PYZsh{} Transformation indem von jeweiliger abhängiger standardnormalverteilter Zufallszahlen}
                 \PY{c+c1}{\PYZsh{} der dazugehörige Erwartungswert subtrahiert wird, und dieses Ergebnis dann durch die dazugehörige Standardabweichung geteilt wird}
                 \PY{c+c1}{\PYZsh{} Die Realisation der Gauss\PYZhy{}Copula ergibt sich dann als der Wert (Wahrscheinlichkeit) der kumulierten Normalverteilungsfunktion}
                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{:}
@@ -650,15 +650,15 @@ aus beiden Realisationen gebildet, welche den Portfolio-Wert ergibt.
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-1) Gleichverteilte Zufallsvariablen: [0.40195872330818816, 0.5547450117792724]
+1) Gleichverteilte Zufallszahlen: [0.5474698703901343, 0.20312175454000392]
 
-2) Standardnormalverteilte Zufallsvariablen: [-0.24828042  0.13765893]
+2) Standardnormalverteilte Zufallszahlen: [ 0.1192715  -0.83052236]
 
-3) Standardnormalverteilte abhängige Zufallsvariablen: [1.503439158025408, 3.4129768012545965]
+3) Standardnormalverteilte abhängige Zufallszahlen: [2.23854300702303, 0.5084329092563715]
 
-4) Realisationen der Gauss-Copula: [0.4019587233081881, 0.5547450117792724]
+4) Realisationen der Gauss-Copula: [0.5474698703901343, 0.20312175454000397]
 
-5) Sumulationsergebnisse: x=15.980412766918118, y=14.233569835090186, Summe=30.213982602008304
+5) Sumulationsergebnisse: x=14.525301296098657, y=19.156295436439944, Summe=33.6815967325386
 
     \end{Verbatim}
 
@@ -669,17 +669,17 @@ aus beiden Realisationen gebildet, welche den Portfolio-Wert ergibt.
     \hypertarget{graphische-ausgaben}{%
 \subsection{Graphische Ausgaben:}\label{graphische-ausgaben}}
 
-\hypertarget{realisationen-abhuxe4ngiger-bivariat-normalverteilter-zufallsvariablen}{%
+\hypertarget{realisationen-abhuxe4ngiger-bivariat-normalverteilter-zufallszahlen}{%
 \subsubsection{Realisationen abhängiger bivariat normalverteilter
-Zufallsvariablen}\label{realisationen-abhuxe4ngiger-bivariat-normalverteilter-zufallsvariablen}}
+Zufallszahlen}\label{realisationen-abhuxe4ngiger-bivariat-normalverteilter-zufallszahlen}}
 
-Die Zufallsvariablen \(x\) und \(y\) streuen mit der Varianz
-\(\sigma_x\) bzw. \(\sigma_y\) um ihren jeweiligen Erwartungswert
-\(\mu_x\) bzw. \(\mu_y\).
+Die Zufallszahlen \(x\) und \(y\) streuen mit der Varianz \(\sigma_x\)
+bzw. \(\sigma_y\) um ihren jeweiligen Erwartungswert \(\mu_x\) bzw.
+\(\mu_y\).
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}9}]:} \PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste} \PY{o}{=} \PY{n}{split\PYZus{}liste}\PY{p}{(}\PY{n}{total\PYZus{}standard\PYZus{}norm\PYZus{}ab\PYZus{}list}\PY{p}{)} \PY{c+c1}{\PYZsh{} X\PYZhy{} und Y\PYZhy{}Realisationen aus gemeinsamer Liste extrahieren}
-        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Realisationen abhängiger bivariat normalverteilter Zufallsvariablen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Spezifischer Titel}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Realisationen abhängiger bivariat normalverteilter Zufallszahlen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Spezifischer Titel}
         \PY{n}{plot\PYZus{}func}\PY{p}{(}\PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste}\PY{p}{,} \PY{n}{show}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{get\PYZus{}xy\PYZus{}lim}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} Plot erzeugen und anzeigen}
 \end{Verbatim}
 
@@ -692,9 +692,8 @@ Die Zufallsvariablen \(x\) und \(y\) streuen mit der Varianz
 \subsection{Realisationen
 Gauss-Copula}\label{realisationen-gauss-copula}}
 
-Darstellung der inneren Abhänigkeitsstruktur ohne die (alten)
-Randverteilungen. Diese Realisationen lassen sich als
-Wahrscheinlichkeiten interpretieren.
+Darstellung der Abhänigkeitsstruktur ohne die (alten) Randverteilungen.
+Diese Realisationen lassen sich als Wahrscheinlichkeiten interpretieren.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}10}]:} \PY{n}{x\PYZus{}liste}\PY{p}{,} \PY{n}{y\PYZus{}liste} \PY{o}{=} \PY{n}{split\PYZus{}liste}\PY{p}{(}\PY{n}{total\PYZus{}realisation\PYZus{}cop\PYZus{}list}\PY{p}{)} \PY{c+c1}{\PYZsh{} X\PYZhy{} und Y\PYZhy{}Realisationen aus gemeinsamer Liste extrahieren}
@@ -711,7 +710,7 @@ Wahrscheinlichkeiten interpretieren.
 \subsection{Realisationen gleichverteilte X, Y mit
 Gauss-Copula}\label{realisationen-gleichverteilte-x-y-mit-gauss-copula}}
 
-Die innere Abhängikeitsstruktur wurde auf die neuen Randverteilungen
+Die Abhängikeitsstruktur wurde auf die neuen Randverteilungen
 übertragen.\\
 Die Realisationen sind auf das Intervall \([18,42]\) beschränkt (siehe
 rand\_y, rand\_y), da dies die gemeinsame Ober- bzw. Untergrenze der
@@ -733,10 +732,11 @@ vorgegebenen neuen Randverteilungen ist.
 Gauss-Copula}\label{histogramm-xy-realisationen-gleichverteilte-x-y-mit-gauss-copula}}
 
 Darstellung der Simulationsergebnisse als Summe der \(x\) und \(y\)
-Realisationen unter Berücksichtung inneren Abhänigkeitsstruktur und
-neuen Randverteilungen. Es zeigt sich ein auf das Intervall \([18,42]\)
+Realisationen unter Berücksichtung Abhänigkeitsstruktur und neuen
+Randverteilungen. Es zeigt sich ein auf das Intervall \([18,42]\)
 beschränkter glockenförmiger Verlauf, wie er für eine Normalverteilung
-üblich ist.
+üblich ist. Hinweis: Obige Aussage gilt nur bei einem
+Korrelationskoeffizienten von \(0\).
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}12}]:} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{71}
@@ -806,14 +806,14 @@ Funktionen}\label{parameterfestlegung-und-aufruf-der-funktionen}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
 \#-------------------------------------------------------------------------------------------------------------------\#
-|                                        Der VaR beträgt: -23.4076759890292.                                        | 
+|                                       Der VaR beträgt: -23.292246488674394.                                       | 
 \#-------------------------------------------------------------------------------------------------------------------\#
-|                                       Der CVaR beträgt: -21.58008721670611.                                       | 
+|                                       Der CVaR beträgt: -21.527951677274842.                                      | 
 \#-------------------------------------------------------------------------------------------------------------------\#
 |                             Power-Spektrales Risikomaß bei der Monte-Carlo-Simulation:                            | 
 \#-------------------------------------------------------------------------------------------------------------------\#
-|                                   Der Erwartungswert beträgt: 30.00389831202371.                                  | 
-|                                       Das Risiko beträgt: 26.83089017748455.                                      | 
+|                                   Der Erwartungswert beträgt: 29.92361231216212.                                  | 
+|                                      Das Risiko beträgt: 26.775350767136274.                                      | 
 \#-------------------------------------------------------------------------------------------------------------------\#
 
     \end{Verbatim}
@@ -912,20 +912,20 @@ durchgeführten Simulationen variiert werden.
 |   [INFO] Der DataFrame mit den auf den auf 10 mal 100 Durchläufen beruhenden Risikomaßen ergibt sich wie folgt:   | 
 \#-------------------------------------------------------------------------------------------------------------------\#
          VaR  VaR-Change       CVaR  CVaR-Change      Power  Power-Change
-0 -22.330991         NaN -21.071164          NaN  26.820230           NaN
-1 -23.642555    0.058733 -21.376833     0.014507  26.607497     -0.007932
-2 -22.568408   -0.045433 -20.699304    -0.031695  25.943138     -0.024969
-3 -22.980029    0.018239 -21.760669     0.051275  26.816375      0.033660
-4 -23.556927    0.025104 -21.895559     0.006199  26.359509     -0.017037
-5 -24.500979    0.040075 -22.357867     0.021114  27.148708      0.029940
-6 -23.204382   -0.052920 -22.089899    -0.011985  26.747490     -0.014779
-7 -24.026181    0.035416 -21.949410    -0.006360  26.685129     -0.002331
-8 -23.754698   -0.011299 -21.525206    -0.019326  27.193393      0.019047
-9 -23.033860   -0.030345 -21.903526     0.017576  27.003647     -0.006978
+0 -23.256615         NaN -21.636180          NaN  26.947987           NaN
+1 -23.997290    0.031848 -22.211472     0.026589  28.046302      0.040757
+2 -23.284165   -0.029717 -21.483862    -0.032758  26.760908     -0.045831
+3 -22.889987   -0.016929 -20.777215    -0.032892  25.932862     -0.030942
+4 -23.155260    0.011589 -21.574370     0.038367  27.073755      0.043994
+5 -23.196542    0.001783 -22.062725     0.022636  27.388507      0.011626
+6 -22.280270   -0.039500 -20.463326    -0.072493  27.269637     -0.004340
+7 -23.833364    0.069707 -21.862745     0.068387  26.955147     -0.011533
+8 -22.301710   -0.064265 -20.490398    -0.062771  26.400550     -0.020575
+9 -24.801765    0.112102 -23.087812     0.126762  27.662976      0.047818
 \#-------------------------------------------------------------------------------------------------------------------\#
-|  Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt der kleinste VaR -24.5, der größte -22.33 (Δ = 9.72\%).  | 
-|  Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt der kleinste CVaR -22.36, der größte -20.7 (Δ = 8.01\%). | 
-|  Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt das kleinste P-SRM 25.94, das größte 27.19 (Δ = -4.6\%). | 
+|  Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt der kleinste VaR -24.8, der größte -22.28 (Δ = 11.32\%). | 
+| Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt der kleinste CVaR -23.09, der größte -20.46 (Δ = 12.83\%).| 
+| Nach 10 Simulationsläufen mit je 100 Durchläufen beträgt das kleinste P-SRM 25.93, das größte 28.05 (Δ = -7.54\%). | 
 \#-------------------------------------------------------------------------------------------------------------------\#
 
     \end{Verbatim}

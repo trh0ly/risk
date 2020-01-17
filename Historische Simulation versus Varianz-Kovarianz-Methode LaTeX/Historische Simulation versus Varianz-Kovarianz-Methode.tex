@@ -9,10 +9,10 @@
 
 
 
-    
 %\documentclass[11pt]{article}
 \documentclass[paper=landscape]{scrartcl}
 	\usepackage[paperwidth=40cm,paperheight=175cm,margin=1in]{geometry}
+
     
     
     \usepackage[T1]{fontenc}
@@ -295,7 +295,7 @@
 \section{Historische Simulation versus
 Varianz-Kovarianz-Methode}\label{historische-simulation-versus-varianz-kovarianz-methode}}
 
-© Thomas Robert Holy 2019 Version 1.2.0 Visit me on GitHub:
+© Thomas Robert Holy 2019 Version 1.2.1 Visit me on GitHub:
 https://github.com/trh0ly
 
 \hypertarget{voraussetzungen}{%
@@ -915,12 +915,15 @@ Dabei ist bei jeder Berechnung der jeweils vorher errechnete Wert zu
 subtrahieren.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{power}\PY{p}{(}\PY{n}{liste}\PY{p}{,} \PY{n}{gamma}\PY{p}{)}\PY{p}{:}  
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{power}\PY{p}{(}\PY{n}{liste}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{VarKoVar}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}  
              \PY{n}{liste} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{liste}\PY{p}{)} \PY{c+c1}{\PYZsh{} Liste sortieren}
              
              \PY{n}{EW} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{liste}\PY{p}{)} \PY{c+c1}{\PYZsh{} Erwartungswert bestimmen}
              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Power\PYZhy{}Spektrales Risikomaß bei der historischen Simulation:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{if} \PY{n}{VarKoVar} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Power\PYZhy{}Spektrales Risikomaß bei der historischen Simulation:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Power\PYZhy{}Spektrales Risikomaß bei der Varianz\PYZhy{}Kovarianz\PYZhy{}Methode:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{SCREEN\PYZus{}WIDTH} \PY{o}{*} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{|}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{centered}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Der Erwartungswert beträgt: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{EW}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
          
@@ -1023,7 +1026,7 @@ selbiges. \#\#\# Parameterfestlegung und Aufruf der Funktionen
          \PY{n}{CVaR}\PY{p}{(}\PY{n}{var\PYZus{}covar\PYZus{}results}\PY{p}{,} \PY{n}{alpha}\PY{p}{)}
          
          \PY{n}{gamma} \PY{o}{=} \PY{l+m+mf}{0.5}
-         \PY{n}{power}\PY{p}{(}\PY{n}{var\PYZus{}covar\PYZus{}results}\PY{p}{,} \PY{n}{gamma}\PY{p}{)}
+         \PY{n}{power}\PY{p}{(}\PY{n}{var\PYZus{}covar\PYZus{}results}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{VarKoVar}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
          \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
 \end{Verbatim}
@@ -1034,7 +1037,7 @@ selbiges. \#\#\# Parameterfestlegung und Aufruf der Funktionen
 \#----------------------------------------------------------------------------------------------------\#
 |                              Der CVaR beträgt: 0.025490031878150177.                               | 
 \#----------------------------------------------------------------------------------------------------\#
-|                    Power-Spektrales Risikomaß bei der historischen Simulation:                     | 
+|                   Power-Spektrales Risikomaß bei der Varianz-Kovarianz-Methode:                    | 
 \#----------------------------------------------------------------------------------------------------\#
 |                        Der Erwartungswert beträgt: 0.00010727212451525916.                         | 
 |                              Das Risiko beträgt: 0.01008497086603982.                              | 

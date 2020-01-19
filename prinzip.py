@@ -7,7 +7,7 @@ def prinzip(gamma, RM_list):
     # Delta
     #---------------------------
     """
-    p = np.linspace(1/len(RM_list), len(RM_list)/len(RM_list), len(RM_list))
+    p = np.linspace(0, 1, len(RM_list))
     phi = np.power(p, gamma)
 
     def make_delta_for_plot(liste, pop):
@@ -31,24 +31,28 @@ def prinzip(gamma, RM_list):
     plt.grid()
     plt.axhline(0, color='black')
     plt.axvline(0, color='black')
+    
     """
     #---------------------------
     # Fläche
     #---------------------------
     """
     b = gamma
-    p = np.array(np.arange(1/len(RM_list), len(RM_list)/len(RM_list), 1/len(RM_list)))
-    phi_p = np.power((b * p), (b-1))
-    x = np.array(np.arange(1/len(RM_list),len(RM_list)/len(RM_list),1/len(RM_list)))
+    p = np.array(np.arange(0.001, 1, 1/len(RM_list)))
+    p_liste = []
+    for i in p:
+        phi_p = b * i**(b-1)
+        p_liste.append(phi_p)
 
+    x = np.array(np.arange(0,1,1/len(RM_list)))
     liste = []
-    for i in phi_p:
+    for i in p_liste:
         liste.append(i)
     y = liste
 
     plt.subplot(222)
-    plt.plot(p, phi_p, color='orange')
-    plt.bar(x, liste, width=(1/253), edgecolor='black')
+    plt.plot(p, p_liste, color='orange')
+    plt.bar(x, liste, width=(1/len(RM_list)), edgecolor='black')
     plt.xlabel('p')
     plt.ylabel('\u03A6(p)')
     plt.title(' ')

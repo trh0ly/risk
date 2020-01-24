@@ -9,10 +9,10 @@
 
 
 
+    
 %\documentclass[11pt]{article}
 \documentclass[paper=landscape]{scrartcl}
 	\usepackage[paperwidth=40cm,paperheight=175cm,margin=1in]{geometry}
-
     
     
     \usepackage[T1]{fontenc}
@@ -295,7 +295,7 @@
 \section{Historische Simulation versus
 Varianz-Kovarianz-Methode}\label{historische-simulation-versus-varianz-kovarianz-methode}}
 
-© Thomas Robert Holy 2019 Version 1.2.1 Visit me on GitHub:
+© Thomas Robert Holy 2019 Version 1.2.2 Visit me on GitHub:
 https://github.com/trh0ly
 
 \hypertarget{voraussetzungen}{%
@@ -735,7 +735,8 @@ Standardabweichungen nicht gleich dem Erwartungswert der PF-Rendite /
 Standardabweichung?}\label{warum-ist-der-mittelwert-der-zu-erwartenden-renditen-standardabweichungen-nicht-gleich-dem-erwartungswert-der-pf-rendite-standardabweichung}}
 
 Grund: Rechnung erfolgt mit Float-Werten, welche eine Annäherung an
-reelle Zahlen darstellen. Diese sind nicht exakt.
+reelle Zahlen darstellen. Diese sind nicht exakt. Des Weiteren
+Subadditivität der Standardabweichung.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}14}]:} \PY{p}{(}\PY{n}{std\PYZus{}dattensatz1} \PY{o}{+} \PY{n}{std\PYZus{}dattensatz2}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2} \PY{o}{==} \PY{n}{std\PYZus{}PF}
